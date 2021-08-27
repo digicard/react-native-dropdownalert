@@ -527,10 +527,10 @@ export default class DropdownAlert extends Component {
     if (payload && 
         payload.hasOwnProperty('styles') && payload.styles && 
         payload.styles.hasOwnProperty('imageStyle') &&  payload.styles.imageStyle) {
-      ({imageStyle} = payload.styles.imageStyle);
+      ({imageStyle} = payload.styles);
     }
     else
-      ({imageStyle} = this.props.imageStyle);
+      ({imageStyle} = this.props);
 
     return (
       <ImageView
