@@ -1,16 +1,22 @@
 {
-  "name": "react-native-dropdownalert",
-  "version": "4.3.0",
+  "name": "digicard-react-native-dropdownalert",
+  "version": "4.4.0",
   "description": "A simple alert to notify users about new chat messages, something went wrong or everything is ok.",
   "main": "DropdownAlert.js",
   "types": "index.d.ts",
+  "contributors": [
+    {
+      "name": "Alberto Lopez - digicard",
+      "email": "alopez@digicard.net"
+    }
+  ],
   "scripts": {
     "test": "jest",
     "test:ci": "jest && codecov"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/testshallpass/react-native-dropdownalert.git"
+    "url": "git+https://github.com/digicard/react-native-dropdownalert.git"
   },
   "keywords": [
     "dropdown",
@@ -26,9 +32,9 @@
   "author": "Brian Sinnicke",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/testshallpass/react-native-dropdownalert/issues"
+    "url": "https://github.com/digicard/react-native-dropdownalert/issues"
   },
-  "homepage": "https://github.com/testshallpass/react-native-dropdownalert#readme",
+  "homepage": "https://github.com/digicard/react-native-dropdownalert#readme",
   "devDependencies": {
     "@babel/core": "7.7.7",
     "@babel/preset-env": "7.7.7",

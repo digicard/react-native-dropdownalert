@@ -279,6 +279,7 @@ export default class DropdownAlert extends Component {
   ) => {
     // type is not validated so unexpected types will render alert with default styles.
     // these default styles can be overridden with style props. (for example, containerStyle)
+    // ALopez: Default styles can be overriden also by styles in payload
     const {closeInterval} = this.props;
     // title and message are converted to strings
     const data = {
@@ -428,6 +429,16 @@ export default class DropdownAlert extends Component {
   };
   getStyleForType(type) {
     const {defaultContainer} = this.props;
+    const {payload} = this.alertData;
+
+    if (payload && payload.hasOwnProperty('styles') && 
+      payload.styles && payload.styles.hasOwnProperty('containerStyle')) {
+      return [
+        StyleSheet.flatten(defaultContainer),
+        StyleSheet.flatten(payload.styles.containerStyle),
+      ];
+    }
+
     switch (type) {
       case TYPE.info:
         return [
@@ -471,6 +482,16 @@ export default class DropdownAlert extends Component {
     }
   }
   getBackgroundColorForType(type) {
+    const {payload} = this.alertData;
+
+    if (payload && 
+        payload.hasOwnProperty('styles') && payload.styles && 
+        payload.styles.hasOwnProperty('containerStyle') &&  payload.styles.containerStyle && 
+        payload.styles.containerStyle.hasOwnProperty('containerbackgroundColorStyle') && payload.styles.containerStyle.backgroundColor) {
+      
+      return payload.styles.containerStyle.backgroundColor;
+    }
+
     switch (type) {
       case TYPE.info:
         return this.props.infoColor;
@@ -499,9 +520,21 @@ export default class DropdownAlert extends Component {
     if (this.props.renderImage) {
       return this.props.renderImage(this.props, this.alertData);
     }
+
+    const {payload} = this.alertData;
+    var imageStyle;
+
+    if (payload && 
+        payload.hasOwnProperty('styles') && payload.styles && 
+        payload.styles.hasOwnProperty('imageStyle') &&  payload.styles.imageStyle) {
+      ({imageStyle} = payload.styles.imageStyle);
+    }
+    else
+      ({imageStyle} = this.props.imageStyle);
+
     return (
       <ImageView
-        style={StyleSheet.flatten(this.props.imageStyle)}
+        style={StyleSheet.flatten(imageStyle)}
         source={source}
       />
     );
@@ -510,7 +543,29 @@ export default class DropdownAlert extends Component {
     if (this.props.renderTitle) {
       return this.props.renderTitle(this.props, this.alertData);
     }
-    const {titleTextProps, titleStyle, titleNumOfLines} = this.props;
+
+    const {payload} = this.alertData;
+    var titleTextProps, titleStyle, titleNumOfLines;
+
+    if (payload &&  payload.hasOwnProperty('styles') && payload.styles) {
+      if(payload.styles.hasOwnProperty('titleTextProps') &&  payload.styles.titleTextProps)
+        ({titleTextProps} = payload.styles);
+      else
+        ({titleTextProps} = this.props);
+
+      if(payload.styles.hasOwnProperty('titleStyle') &&  payload.styles.titleStyle)
+        ({titleStyle} = payload.styles);
+      else
+        ({titleStyle} = this.props);
+
+      if(payload.styles.hasOwnProperty('titleNumOfLines') &&  payload.styles.titleNumOfLines)
+        ({titleNumOfLines} = payload.styles);
+      else
+        ({titleNumOfLines} = this.props);
+    }
+    else
+      ({titleTextProps, titleStyle, titleNumOfLines} = this.props);
+
     return (
       <TextView
         {...titleTextProps}
@@ -524,7 +579,29 @@ export default class DropdownAlert extends Component {
     if (this.props.renderMessage) {
       return this.props.renderMessage(this.props, this.alertData);
     }
-    const {messageTextProps, messageStyle, messageNumOfLines} = this.props;
+
+    const {payload} = this.alertData;
+    var messageTextProps, messageStyle, messageNumOfLines;
+
+    if (payload &&  payload.hasOwnProperty('styles') && payload.styles) {
+      if(payload.styles.hasOwnProperty('messageTextProps') &&  payload.styles.messageTextProps)
+        ({messageTextProps} = payload.styles);
+      else
+        ({messageTextProps} = this.props);
+
+      if(payload.styles.hasOwnProperty('messageStyle') &&  payload.styles.messageStyle)
+        ({messageStyle} = payload.styles);
+      else
+        ({messageStyle} = this.props);
+
+      if(payload.styles.hasOwnProperty('messageNumOfLines') &&  payload.styles.messageNumOfLines)
+        ({messageNumOfLines} = payload.styles);
+      else
+        ({messageNumOfLines} = this.props);
+    }
+    else
+      ({messageTextProps, messageStyle, messageNumOfLines} = this.props);
+
     return (
       <TextView
         {...messageTextProps}

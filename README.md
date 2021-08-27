@@ -11,6 +11,26 @@
 | :----: | :---: | :----: | :----: |
 | ![screenshot](https://raw.github.com/testshallpass/react-native-dropdownalert/master/screenshots/info.png) | ![screenshot](https://raw.github.com/testshallpass/react-native-dropdownalert/master/screenshots/warning.png) | ![screenshot](https://raw.github.com/testshallpass/react-native-dropdownalert/master/screenshots/error.png) | ![screenshot](https://raw.github.com/testshallpass/react-native-dropdownalert/master/screenshots/success.png) |
 
+### __digicard__ addons:
+In addition to `source`, payload now also supports overriding the following props:
+```
+payload: {
+  styles: {
+    containerStyle: {             // whole style
+      backgroundColor: <color>    // background only
+    },
+
+    imageStyle: {},
+
+    titleStyle: {},
+    titleTextProps: <int>,
+    titleNumOfLines: <int>,
+
+    messageStyle: {},
+    messageTextProps: {},
+    messageNumOfLines: <int>
+  }
+```
 ## Table of contents
 
 1. [Support](#support)
